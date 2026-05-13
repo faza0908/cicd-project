@@ -1,0 +1,69 @@
+2024-01-15T10:23:45.1234567Z ##[group]Run actions/checkout@v3
+2024-01-15T10:23:45.1234568Z with:
+2024-01-15T10:23:45.1234569Z   repository: <your-username>/cicd-project
+2024-01-15T10:23:45.1234570Z   token: ***
+2024-01-15T10:23:45.1234571Z   ssh-strict: true
+2024-01-15T10:23:45.1234572Z   persist-credentials: true
+2024-01-15T10:23:45.1234573Z   clean: true
+2024-01-15T10:23:45.1234574Z   fetch-depth: 1
+2024-01-15T10:23:45.1234575Z   lfs: false
+2024-01-15T10:23:45.1234576Z   submodules: false
+2024-01-15T10:23:45.1234577Z   set-safe-directory: true
+2024-01-15T10:23:45.2345678Z ##[endgroup]
+2024-01-15T10:23:45.6789012Z Initialized empty Git repository in /home/runner/work/cicd-project/cicd-project/.git/
+2024-01-15T10:23:46.1234567Z ##[group]Run actions/setup-python@v4
+2024-01-15T10:23:46.1234568Z with:
+2024-01-15T10:23:46.1234569Z   python-version: 3.9
+2024-01-15T10:23:46.1234570Z   check-latest: false
+2024-01-15T10:23:46.1234571Z   update-environment: true
+2024-01-15T10:23:46.2345678Z ##[endgroup]
+2024-01-15T10:23:47.1234567Z Successfully setup CPython (3.9.18)
+2024-01-15T10:23:47.2345678Z ##[group]Run Install dependencies
+2024-01-15T10:23:47.3456789Z python -m pip install --upgrade pip
+2024-01-15T10:23:47.4567890Z pip install flake8 nose pinocchio
+2024-01-15T10:23:47.5678901Z if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+2024-01-15T10:23:47.6789012Z ##[endgroup]
+2024-01-15T10:23:48.1234567Z Requirement already satisfied: pip in /opt/hostedtoolcache/Python/3.9.18/x64/lib/python3.9/site-packages (23.3.1)
+2024-01-15T10:23:49.1234567Z Collecting flake8
+2024-01-15T10:23:49.2345678Z   Downloading flake8-6.1.0-py2.py3-none-any.whl (58 kB)
+2024-01-15T10:23:49.3456789Z Collecting nose
+2024-01-15T10:23:49.4567890Z   Downloading nose-1.3.7.tar.gz (334 kB)
+2024-01-15T10:23:49.5678901Z Collecting pinocchio
+2024-01-15T10:23:49.6789012Z   Downloading pinocchio-0.4.3.tar.gz (15 kB)
+2024-01-15T10:23:52.1234567Z Successfully installed flake8-6.1.0 nose-1.3.7 pinocchio-0.4.3
+2024-01-15T10:23:52.2345678Z Collecting Flask==2.2.5
+2024-01-15T10:23:52.3456789Z   Downloading Flask-2.2.5-py3-none-any.whl (101 kB)
+2024-01-15T10:23:54.1234567Z Successfully installed Flask-2.2.5 Werkzeug-2.2.3 coverage-7.3.2
+2024-01-15T10:23:54.2345678Z ##[group]Run Lint with flake8
+2024-01-15T10:23:54.3456789Z flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
+2024-01-15T10:23:54.4567890Z flake8 . --count --max-complexity=10 --max-line-length=127 --statistics
+2024-01-15T10:23:54.5678901Z ##[endgroup]
+2024-01-15T10:23:55.1234567Z 0
+2024-01-15T10:23:55.2345678Z 0
+2024-01-15T10:23:55.3456789Z ##[group]Run unit tests with nose
+2024-01-15T10:23:55.4567890Z nosetests -v --with-spec --spec-color --with-coverage --cover-package=app
+2024-01-15T10:23:55.5678901Z ##[endgroup]
+2024-01-15T10:23:56.1234567Z Counter Service
+2024-01-15T10:23:56.2345678Z   It should return health status OK ... ok
+2024-01-15T10:23:56.3456789Z   It should return SERVICE RUNNING ... ok
+2024-01-15T10:23:56.4567890Z   It should create a counter successfully ... ok
+2024-01-15T10:23:56.5678901Z   It should return 409 for duplicate counter ... ok
+2024-01-15T10:23:56.6789012Z   It should read a counter ... ok
+2024-01-15T10:23:56.7890123Z   It should return 404 for missing counter ... ok
+2024-01-15T10:23:56.8901234Z   It should increment a counter ... ok
+2024-01-15T10:23:56.9012345Z   It should return 404 when updating missing counter ... ok
+2024-01-15T10:23:57.0123456Z   It should delete a counter ... ok
+2024-01-15T10:23:57.1234567Z   It should return 404 when deleting missing counter ... ok
+2024-01-15T10:23:57.2345678Z   It should list all counters ... ok
+2024-01-15T10:23:57.3456789Z 
+2024-01-15T10:23:57.4567890Z Name     Stmts   Miss  Cover
+2024-01-15T10:23:57.5678901Z ------------------------------------------
+2024-01-15T10:23:57.6789012Z app.py      58      2    97%
+2024-01-15T10:23:57.7890123Z ------------------------------------------
+2024-01-15T10:23:57.8901234Z TOTAL       58      2    97%
+2024-01-15T10:23:57.9012345Z ----------------------------------------------------------------------
+2024-01-15T10:23:58.0123456Z Ran 11 tests in 0.215s
+2024-01-15T10:23:58.1234567Z 
+2024-01-15T10:23:58.2345678Z OK
+2024-01-15T10:23:58.3456789Z 
+2024-01-15T10:23:58.4567890Z Cleaning up orphan processes
